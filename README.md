@@ -5,7 +5,7 @@
   Add your open source license, GitHub uses Creative Commons Attribution 4.0 International.
 -->
 
-# Publish to GitHub Packages
+# [Publish to GitHub Packages](https://github.com/skills/publish-packages.git)
 
 _Use GitHub Actions to publish your project to a Docker image._
 
@@ -70,27 +70,34 @@ We'll start by creating the workflow file to publish a Docker image to GitHub Pa
 1. Open the pull request I made for you from the `cd` branch.
 1. Add a new file at `.github/workflows/publish.yml`.
 1. Add the following to the `publish.yml` file:
-   ```yml
-   name: Publish to Docker
-   on:
-     push:
-       branches:
-         - main
-   jobs:
-     publish:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v2
-         # Add your test steps here if needed...
-         - name: Build container
-           uses: docker/build-push-action@v1
-           with:
-             username: YOURNAME
-             password: ${{ secrets.GITHUB_TOKEN }}
-             registry: docker.pkg.github.com
-             repository: YOURNAME/publish-packages/game
-             tag_with_sha: true
-   ```
+  ```yml
+  name: Publish to Docker
+  on:
+    push:
+      branches:
+        - main
+  jobs:
+    publish:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up QEMU
+          uses: docker/setup-qemu-action@v2
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
+        - name: Login to GitHub Container Registry
+          uses: docker/login-action@v2
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+        - name: Build container
+          uses: docker/build-push-action@v3
+          with:
+            pull: true
+            push: true
+            tags: ghcr.io/${{ github.actor }}/game:latest
+  ```
 1. Replace `YOURNAME` with your username.
 1. Commit your changes.
 1. Wait about 20 seconds then refresh this page for the next step.
@@ -114,7 +121,7 @@ We will add a `Dockerfile` in this pull request. The `Dockerfile` contains a set
 
 1. In the `cd` branch, create `Dockerfile` at the project root and include:
    ```dockerfile
-   FROM nginx:1.17
+   FROM nginx:1.23
    COPY . /usr/share/nginx/html
    ```
 1. Commit your changes.
