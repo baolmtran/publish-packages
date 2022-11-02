@@ -5,7 +5,7 @@
   Add your open source license, GitHub uses Creative Commons Attribution 4.0 International.
 -->
 
-# Publish to GitHub Packages
+# [Publish to GitHub Packages](https://github.com/skills/publish-packages.git)
 
 _Use GitHub Actions to publish your project to a Docker image._
 
@@ -103,7 +103,7 @@ We'll start by creating the workflow file to publish a Docker image to GitHub Pa
   Define terms and link to docs.github.com.
 -->
 
-<details id=2 open>
+<details id=2>
 <summary><h2>Step 2: Add a Dockerfile</h2></summary>
 
 _You created a publishing workflow! :tada:_
@@ -114,7 +114,7 @@ We will add a `Dockerfile` in this pull request. The `Dockerfile` contains a set
 
 1. In the `cd` branch, create `Dockerfile` at the project root and include:
    ```dockerfile
-   FROM nginx:1.17
+   FROM nginx:1.23
    COPY . /usr/share/nginx/html
    ```
 1. Commit your changes.
@@ -128,7 +128,7 @@ We will add a `Dockerfile` in this pull request. The `Dockerfile` contains a set
   Define terms and link to docs.github.com.
 -->
 
-<details id=3>
+<details id=3 open>
 <summary><h2>Step 3: Merge your pull request</h2></summary>
 
 _Let's get publishing! :heart:_
