@@ -98,7 +98,7 @@ We'll start by creating the workflow file to publish a Docker image to GitHub Pa
             push: true
             tags: ghcr.io/${{ github.actor }}/game:latest
   ```
-1. Replace `YOURNAME` with your username.
+1. `${{ github.actor }}` is your username.
 1. Commit your changes.
 1. Wait about 20 seconds then refresh this page for the next step.
 
@@ -189,7 +189,7 @@ If everything went well, 🤞 you should see `Login Succeeded` in your terminal.
 ### :keyboard: Activity: Pull your image
 
 1. Copy and paste the `pull` command from the package instructions into your terminal. It should look something like this:
-   - `docker pull docker.pkg.github.com/YOURNAME/js-build/tic-tac-toe:f29`
+   - `docker pull ghcr.io/YOURNAME/game:latest`
    ![screenshot of the pull command on the GitHub package page](https://i.imgur.com/pFQgfSZ.png)
 1. Press **Enter**.
 1. You should see output indicating that the pull was successful, like `Status: Downloaded newer image for docker`.
